@@ -1,0 +1,31 @@
+{
+  "name": "apparts-api-boilerplate",
+  "version": "1.0.0",
+  "description": "Boilerplate for a REST-API",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "setupDB": "node scripts/setup.js",
+    "serve": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@ph-uhl.com:Apparts/apparts-api-boilerplate.git"
+  },
+  "keywords": [
+    "apparts",
+    "api",
+    "rest",
+    "node"
+  ],
+  "author": "Philipp Uhl",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "apparts-config": "git+ssh://git@ph-uhl.com:Apparts/apparts-config.git#semver:^1.0.0",
+    "apparts-error": "git+ssh://git@ph-uhl.com:Apparts/apparts-error.git#semver:^1.0.0",
+    "apparts-model": "git+ssh://git@ph-uhl.com:Apparts/apparts-model.git#semver:^2.0.0",
+    "apparts-types": "git+ssh://git@ph-uhl.com:Apparts/apparts-types.git#semver:^2.0.0",
+    "apparts-db": "git+ssh://git@ph-uhl.com:Apparts/apparts-db.git#semver:^1.0.0",
+    "apparts-node-app": "git+ssh://git@ph-uhl.com:Apparts/apparts-node-app.git#semver:^1.0.0"
+  }
+}

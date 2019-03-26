@@ -1,0 +1,4 @@
+#+TITLE: REST API Boilerplate
+#+DATE: [2019-03-26 Tue]
+#+AUTHOR: Philipp Uhl
+
