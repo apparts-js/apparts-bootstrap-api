@@ -2,3 +2,38 @@
 #+DATE: [2019-03-26 Tue]
 #+AUTHOR: Philipp Uhl
 
+* Provided REST API
+
+** POST =/v1/myroute=
+
+- Body Parameters
+  - ~str {string}~ :: A string
+- Returns
+  + ~"ok"~
+  + 400
+
+_Example:_
+#+BEGIN_SRC restclient
+:mystr = aaa
+
+POST http://127.0.0.1:3000/v1/myroute
+Content-Type: application/x-www-form-urlencoded
+str=:mystr
+#+END_SRC
+
+#+RESULTS:
+#+BEGIN_SRC js
+"ok"
+// POST http://127.0.0.1:3000/v1/user/
+// HTTP/1.1 200 OK
+// X-Powered-By: Express
+// Vary: Origin
+// Access-Control-Allow-Credentials: true
+// Content-Type: application/json; charset=utf-8
+// Content-Length: 64
+// ETag: W/"40-jhUPKq+D+iLyBAe1Xe3oODIv654"
+// Date: Tue, 12 Feb 2019 16:00:34 GMT
+// Connection: keep-alive
+// Request duration: 0.272916s
+#+END_SRC
+
