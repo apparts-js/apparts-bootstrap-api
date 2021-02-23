@@ -1,0 +1,11 @@
+
+CREATE TABLE demo (
+  id SERIAL PRIMARY KEY,
+  name VARCHAR(240) NOT NULL
+);
+
+CREATE TABLE demo2 (
+  id SERIAL PRIMARY KEY,
+  demoId INT NOT NULL,
+  FOREIGN KEY (demoId) REFERENCES demo(id)
+);
