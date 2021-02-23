@@ -1,0 +1,4 @@
+{
+  "allowedOrigins": ["http://localhost:4000"],
+  "maxReqSize": "10mb"
+}

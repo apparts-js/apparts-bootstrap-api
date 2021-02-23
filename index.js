@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 const yargs = require("yargs/yargs");
 const { hideBin } = require("yargs/helpers");
 const chalk = require("chalk");
@@ -63,6 +65,7 @@ const main = async () => {
   );
   try {
     fs.copySync(templateBaseDir, root);
+    fs.rename(path.join(root, "gitignore"), path.join(root, ".gitignore"));
     const readme = fs.readFileSync(path.join(root, "README.org")).toString();
     fs.writeFileSync(
       path.join(root, "README.org"),

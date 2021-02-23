@@ -1,6 +1,6 @@
 {
   "name": "@apparts/api-boilerplate",
-  "version": "2.0.0",
+  "version": "2.0.2",
   "description": "Boilerplate for a REST-API",
   "scripts": {
     "start": "node index.js"
