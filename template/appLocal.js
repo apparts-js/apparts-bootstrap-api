@@ -2,7 +2,7 @@ const express = require("express");
 const applyMiddleware = require("./src/middleware");
 const addRoutes = require("./src/routes");
 
-const DB_CONFIG = require("@apparts/config").get("db-config");
+/* ###< dbconfig >### */
 
 const app = express();
 app.use((req, res, next) => {
@@ -23,7 +23,7 @@ app.use((req, res, next) => {
   };
   next();
 });
-applyMiddleware(app, DB_CONFIG);
+/* ###< dbmiddleware >### */ applyMiddleware(app, undefined, true); /* ###< dbmiddleware >### */
 
 addRoutes(app);
 

@@ -2,10 +2,10 @@ const express = require("express");
 const applyMiddleware = require("./src/middleware");
 const addRoutes = require("./src/routes");
 
-const DB_CONFIG = require("@apparts/config").get("db-config");
+/* ###< dbconfig >### */
 
 const app = express();
-applyMiddleware(app, DB_CONFIG);
+/* ###< dbmiddleware >### */ applyMiddleware(app); /* ###< dbmiddleware >### */
 
 addRoutes(app);
 
