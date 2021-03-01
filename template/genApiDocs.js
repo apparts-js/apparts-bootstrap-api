@@ -1,4 +1,4 @@
-const addRoutes = require("./routes");
+const addRoutes = require("./src/routes");
 const express = require("express");
 const {
   genApiDocs: { getApi, apiToHtml },
