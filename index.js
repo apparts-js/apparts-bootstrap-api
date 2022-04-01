@@ -10,6 +10,7 @@ const spawn = require("cross-spawn");
 const stdin = process.openStdin();
 const { stdout } = process;
 const prettier = require("prettier");
+const crypto = require("crypto");
 
 const argv = yargs(hideBin(process.argv))
   .command("$0", "", (yargs) =>
@@ -133,12 +134,19 @@ const main = async () => {
     }
     if (useLoginServer) {
       await mergeFiles(root, templateBaseDir, "login-server");
-      await changeMe(
+      await replaceInFileAskUser(
         path.join(root, "config", "mail-config.json"),
         "login server sender email address"
       );
       nextSteps.push("  - Check content of config/aws-config.json");
       nextSteps.push("  - Check content of config/login-config.js");
+    }
+    if (useLoginServer || useModelApi) {
+      await replaceInFile(
+        path.join(root, "config", "login-token-config.js"),
+        "login token config webtokenkey",
+        genToken(128)
+      );
     }
     await cleanFiles(root);
   } catch (e) {
@@ -146,7 +154,7 @@ const main = async () => {
     process.exit(1);
   }
 
-  await changeMe(
+  await replaceInFileAskUser(
     path.join(root, "config", "types-config.json"),
     "bugreport email"
   );
@@ -159,11 +167,16 @@ const main = async () => {
     description: "Boilerplate for a REST-API",
     main: "index_aws.js",
     scripts: {
-      testOne: "jest",
+      "test:one": "jest",
       test: "jest --watch --detectOpenHandles",
-      testCoverage: "jest --coverage",
-      serve: "node index_local.js",
-      generateApiDocs: "node genApiDocs.js > api.html",
+      "test:coverage": "jest --coverage",
+      start: "node index_local.js",
+      "generate:docs": "node genApiDocs.js > api.html",
+      clean: "rimraf coverage build",
+      ci: "npm ci && npm run ci:prettier && npm run ci:eslint && npm run ci:test && npm run build",
+      "ci:prettier": "CI=true prettier --check .",
+      "ci:test": "CI=true npm run test:one",
+      "ci:eslint": "eslint . --ext .js,.ts -c .eslintrc.ci.js",
     },
   };
 
@@ -194,7 +207,10 @@ const main = async () => {
     ]);
     console.log();
     console.log(chalk.green("i"), "Starting to install dev-dependencies.");
-    await installPkgs(["@apparts/backend-test", "eslint"], true);
+    await installPkgs(
+      ["@apparts/backend-test", "eslint", "prettier", "rimraf"],
+      true
+    );
   } catch (e) {
     console.log(
       chalk.red("ERROR:"),
@@ -216,10 +232,14 @@ ${nextSteps.join("\n")}
   process.exit(0);
 };
 
-const changeMe = async (file, name) => {
-  const answer = await askQuestion(`Enter ${name}:`);
+const replaceInFile = async (file, name, value) => {
   const content = fs.readFileSync(file).toString();
-  fs.writeFileSync(file, content.replace(new RegExp(`<${name}>`, "g"), answer));
+  fs.writeFileSync(file, content.replace(new RegExp(`<${name}>`, "g"), value));
+};
+
+const replaceInFileAskUser = async (file, name) => {
+  const answer = await askQuestion(`Enter ${name}:`);
+  replaceInFile(file, name, answer);
 };
 
 const installPkgs = async (pkgs, asDev = false) => {
@@ -326,6 +346,19 @@ const walkDirectory = async (currentDir) => {
     directories.map((dir) => walkDirectory(dir))
   );
   return files.concat(...subFiles);
+};
+
+const genToken = async (tokenLength) => {
+  return new Promise((res) => {
+    crypto.randomBytes(tokenLength, (err, token) => {
+      if (err) {
+        throw "Could not generate Token" + err;
+      } else {
+        this.content.token = token.toString("base64");
+        res(this);
+      }
+    });
+  });
 };
 
 main();

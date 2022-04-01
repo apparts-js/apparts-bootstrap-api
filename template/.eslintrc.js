@@ -1,3 +1,15 @@
+const rules = {
+  "no-var": "error",
+  "prefer-const": "error",
+  "no-unneeded-ternary": "error",
+  "prefer-arrow-callback": "error",
+  "no-lonely-if": "error",
+  "consistent-return": "error",
+  eqeqeq: "error",
+  curly: "error",
+  indent: "off",
+};
+
 module.exports = {
   env: {
     node: true,
@@ -10,16 +22,18 @@ module.exports = {
   },
   overrides: [
     {
-      files: ["*.test.js"],
+      plugins: ["jest"],
+      files: [
+        "*.test.js",
+        "*-test.js",
+        "**/mock*.js",
+        "**/__mocks__/**",
+        "**/tests/**",
+      ],
       env: {
         jest: true,
       },
     },
   ],
-  rules: {
-    "no-var": "error",
-    "prefer-const": "error",
-    "no-unneeded-ternary": "error",
-    "prefer-arrow-callback": "error",
-  },
+  rules,
 };

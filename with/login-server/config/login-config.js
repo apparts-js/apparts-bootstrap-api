@@ -1,8 +1,10 @@
+const webtokenkey = require("@apparts/config").get("login-token-config");
+
 module.exports = {
   pwHashRounds: 10,
   tokenLength: 32,
   apiToken: {
-    webtokenkey: "N4XT!23k)])U}=W10:[G~LXVu/?Mmzariea7Xdz(/ur:7QvOx*v?",
+    webtokenkey,
     expireTime: "10 minutes",
   },
   welcomeMail: {

@@ -1,12 +1,12 @@
 {
-  "name": "@apparts/api-boilerplate",
+  "name": "@apparts/bootstrap-api",
   "version": "2.1.0",
   "description": "Boilerplate for a REST-API",
   "scripts": {
     "start": "node index.js"
   },
   "bin": {
-    "api-boilerplate": "./index.js"
+    "bootstrap-api": "./index.js"
   },
   "main": "index.js",
   "repository": {
