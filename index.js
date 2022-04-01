@@ -145,7 +145,7 @@ const main = async () => {
       await replaceInFile(
         path.join(root, "config", "login-token-config.js"),
         "login token config webtokenkey",
-        genToken(128)
+        await genToken(128)
       );
     }
     await cleanFiles(root);
@@ -354,8 +354,7 @@ const genToken = async (tokenLength) => {
       if (err) {
         throw "Could not generate Token" + err;
       } else {
-        this.content.token = token.toString("base64");
-        res(this);
+        res(token.toString("base64"));
       }
     });
   });
