@@ -1,5 +1,5 @@
 /* ###<includes model api>### */
-const UserSettings = require("@apparts/config").get("login-config");
+const UserSettings = require("@apparts/config").get("login-token-config");
 const {
   apiToken: { webtokenkey },
 } = UserSettings;

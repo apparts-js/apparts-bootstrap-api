@@ -226,7 +226,7 @@ const main = async () => {
     chalk.green("i"),
     `Next steps:
 ${nextSteps.join("\n")}
-  - Run # npm run serve
+  - Run # npm run start
 `
   );
   process.exit(0);
